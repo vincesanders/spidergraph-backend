@@ -1,5 +1,5 @@
 # Backend
-`=====================================================================================================
+```=====================================================================================================
 || POST   | /api/auth/login/       | - Gives back token if username and password are valid         ||
 || POST   | /api/auth/register/    | - Same as above but creates account instead of logging in     ||
 ||~~~~~~~~|~~~~~~~~~~~~~~~~~~~~~~~~|~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~||
@@ -13,7 +13,7 @@
 || POST   | /api/graphs/           | - Creates entry for given graph in database                   ||
 || PUT    | /api/graphs/:id/       | - Updates given graph in the database                         ||
 || DELETE | /api/graphs/:id/       | - Removes chosen graph from the database                      ||
-=====================================================================================================`
+=====================================================================================================```
 
 ## Auth Endpoints
 
