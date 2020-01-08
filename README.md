@@ -36,7 +36,7 @@
     token: "eyJhbGciOiJIUzI1NiIsInR5cCI6..."
   }
   ```
-### POST /api/auth/login
+### POST /api/auth/register
 
   - INPUT - an object containing a 'username','email' & 'password'
   ```
