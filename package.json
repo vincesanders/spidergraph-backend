@@ -6,7 +6,7 @@
   "scripts": {
     "test": "cross-env DB_ENV=test jest --watch",
     "dev": "cross-env DB_ENV=development nodemon index.js",
-    "start": "node index.js"
+    "start": "cross-env DB_ENV=production node index.js"
   },
   "repository": {
     "type": "git",
