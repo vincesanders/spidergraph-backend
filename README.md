@@ -22,29 +22,37 @@
 ### POST /api/auth/login
 
   - INPUT - an object containing a 'username' & 'password'
-  `{
+  ```
+  {
     username:"user",
     password:"pass"
-  }`
+  }
+  ```
   - OUTPUT - an object containing a 'username','email' & 'token'
-  `{
+  ```
+  {
     username:"user",
     email:"user@email.com",
     token: "eyJhbGciOiJIUzI1NiIsInR5cCI6..."
-  }`
+  }
+  ```
 ### POST /api/auth/login
 
   - INPUT - an object containing a 'username','email' & 'password'
-  `{
+  ```
+  {
     username:"user",
     password:"pass",
     email:"user@email.com"
-  }`
+  }
+  ```
   - OUTPUT - an object containing a 'user' that has a 'username','email' & 'token'
-  `{
+  ```
+  {
     username:"user",
     email:"user@email.com",
     token: "eyJhbGciOiJIUzI1NiIsInR5cCI6..."
-  }`
+  }
+  ```
   
   EOF
