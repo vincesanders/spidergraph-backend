@@ -27,7 +27,7 @@ router.post('/register',(req,res)=>{
     auth.register(username,password,email)
         .then(user => {
             const token = generateToken(user);
-            res.status(201).json({user,token:token});
+            res.status(201).json({username:user.username,email:user.email,token:token});
         })
         .catch(err => {
             res.status(500).json({...err,message:'Error registering account.'});
