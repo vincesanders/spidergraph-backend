@@ -13,7 +13,7 @@ router.post('/login',(req,res)=>{
                 const token = generateToken(user);
                 res.status(201).json({username:user.username,email:user.email,token:token});
             } else {
-                res.status(403).json({message:'Invalid username or password'})
+                res.status(400).json({message:'Invalid username or password'})
             }
 
         })
@@ -30,7 +30,15 @@ router.post('/register',(req,res)=>{
             res.status(201).json({username:user.username,email:user.email,token:token});
         })
         .catch(err => {
-            res.status(500).json({...err,message:'Error registering account.'});
+            auth.unique(username,email)
+                .then(dup => {
+                    dup 
+                    ? res.status(400).json({account:dup.username,message:'Account with that username or email already exists.'})
+                    : res.status(500).json({...err,message:'Error registering account.'});
+                })
+                .catch(unique_error => {
+                    res.status(500).json({...unique_error,message:'Please report this error to the backend dev.'});
+                })
         })
 })
 

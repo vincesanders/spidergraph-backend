@@ -13,5 +13,10 @@ const register = async (username,password,email) => {
         .where({username:username})
         .first()
 }
-
-module.exports = {login,register}
+const unique = (username,email) => {
+    return db('users')
+        .select('username','password','email')
+        .where({username:username})
+        .orWhere({email:email}).first()
+}
+module.exports = {login,register,unique}
