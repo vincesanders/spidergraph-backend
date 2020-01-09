@@ -54,6 +54,9 @@
     token: "eyJhbGciOiJIUzI1NiIsInR5cCI6..."
   }
   ```
+  
+## Auth Endpoints
+  
 ### GET /api/users/
 
   - INPUT - none
