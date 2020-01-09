@@ -54,5 +54,53 @@
     token: "eyJhbGciOiJIUzI1NiIsInR5cCI6..."
   }
   ```
+### GET /api/users/
+
+  - INPUT - none
+  - OUTPUT - a list of all users with their 'id', 'username', and 'email'
+  ```
+  [
+    {
+      "id": 1,
+      "username": "user1",
+      "email": "user1@email.com"
+    },
+    {
+      "id": 2,
+      "username": "user2",
+      "email": "user2@email.com"
+    }
+  ]
+  ```
+### GET /api/users/:id
+
+  - INPUT - none
+  - OUTPUT - the 'username', and 'email' of the user with ':id'
+  ```
+  {
+    "username": "user1",
+    "email": "user1@email.com"
+  }
+  ```
+### GET /api/users/:id/graphs
+
+  - INPUT - none
+  - OUTPUT - a list of all user:id's graphs with their 'id' and 'name'
+  ```
+  [
+    {
+      "id": 1,
+      "name": "test2"
+    },
+    {
+      "id": 2,
+      "name": "test2"
+    },
+    {
+      "id": 3,
+      "name": "test2"
+    }
+  ]
+  ```
   
   EOF
