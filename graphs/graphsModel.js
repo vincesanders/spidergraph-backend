@@ -5,22 +5,24 @@ const getData = id => {
         'd.value as Value',
         'a.name as Axis',
         'a.index as AxisPos',
+        'a.id as AxisID',
         'l.name as Layer',
         'l.index as LayerPos',
         'g.id as GraphID',
         'g.name as Graph',
-        'g.theme as Theme',
-        'g.scale as Scale'
+        'g.owner as Owner',
+        'g.theme as Theme'
     ).from('data as d')
         .join('layers as l','d.layerId','l.id')
         .join('axes as a','d.axisId','a.id')
         .join('graphs as g','a.graphId','g.id')
-        .where('g.id',id);
+        .where('g.id',id)
+        .orderBy(['a.index','l.index']);
 }
 
 const addG = graph => {
-    const {name,owner,theme,scale} = graph;
-    return db('graphs').insert({name:name,owner:owner,theme:theme,scale:scale})
+    const {name,owner,theme} = graph;
+    return db('graphs').insert({name:name,owner:owner,theme:theme,scale:0})
 }
 const addA = (axis,graphId) => {
     const axes = axis.map((a,i)=>{
@@ -36,19 +38,37 @@ const addL = (layer,graphId) => {
 }
 const addD = (data,axisId,layerId) => {
     const dataSet = [];
-    const aStart = axisId-data.length;   
+    const aStart = axisId-(data.length-1);
     data.forEach((axis,ai) => {
-        const lStart = layerId-axis.length;
+        const lStart = layerId-(axis.length-1);
         axis.forEach((val,li) => {
-            dataSet.push({value:val,axisId:aStart-ai,layerId:lStart-li})
+            dataSet.push({value:val,axisId:aStart+ai,layerId:lStart+li})
         })
     });
     return db('data').insert(dataSet);
 }
-const overwrite = () => {
-    //trunc & replace data
+const updG = (newGraph,graphId) => {
+    return db('graphs').where('id',graphId)
+        .update(newGraph);
 }
-const remove = () => {
-    //val,layer,graph
+const remG = graphId => {
+    return db('graphs').where('id',graphId).del()
 }
-module.exports = {getData,addG,addA,addL,addD,overwrite,remove}
+const remA = graphId => {
+    return db('axes').where('graphId',graphId).del()
+}
+const remL = graphId => {
+    return db('layers').where('graphId',graphId).del()
+}
+const remD = axisIds => {
+    return db('data').whereIn('axisId',axisIds).del()
+}
+
+
+
+module.exports = {
+    getData,
+    addG,addA,addL,addD,
+    updG,
+    remG,remA,remL,remD
+}
