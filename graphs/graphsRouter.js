@@ -5,7 +5,7 @@ const graphs = require('./graphsModel');
 router.use(authMW);
 
 const reqAuth = (req,res,next) => {
-    if(req.method === 'POST' || req.method === 'PuT'){
+    if(req.method === 'POST' || req.method === 'PUT'){
         const {name,owner,theme,axis,layer,data} = req.body;
         name && owner && theme
         ? typeof name === 'string' && typeof owner === 'number' && typeof theme === 'number'
