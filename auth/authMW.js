@@ -1,5 +1,5 @@
 const jwt = require('jsonwebtoken');
-const secret = require('./authsecret');
+const secret = require('./authSecrets');
 
 const vaildateToken = (req,res,next) => {
     const token = req.headers.token

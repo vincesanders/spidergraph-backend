@@ -1,4 +1,3 @@
-
 exports.up = function(knex) {
     return knex.schema
         .createTable('users',tbl => {
@@ -24,36 +23,48 @@ exports.up = function(knex) {
             tbl.float('scale')
                 .notNullable()
         })
-        .createTable('dataLabels', tbl => {
+        .createTable('axes', tbl => {
             tbl.increments()
             tbl.string('name')
+                .notNullable()
+            tbl.integer('index')
                 .notNullable()
             tbl.integer('graphId')
                 .notNullable()
                 .references('id')
                 .inTable('graphs')
-            tbl.boolean('isAxis')
-                .notNullable()
         })
-        .createTable('dataValues', tbl => {
+        .createTable('layers', tbl => {
+            tbl.increments()
+            tbl.string('name')
+                .notNullable()
+            tbl.integer('index')
+                .notNullable()
+            tbl.integer('graphId')
+                .notNullable()
+                .references('id')
+                .inTable('graphs')
+        })
+        .createTable('data', tbl => {
             tbl.increments()
             tbl.float('value')
                 .notNullable()
             tbl.integer('axisId')
                 .notNullable()
                 .references('id')
-                .inTable('dataLabels')
+                .inTable('axes')
             tbl.integer('layerId')
                 .notNullable()
                 .references('id')
-                .inTable('dataLabels')
+                .inTable('layers')
         })
 };
 
 exports.down = function(knex) {
     return knex.schema
-        .dropTableIfExists('dataValues')
-        .dropTableIfExists('dataLabels')
+        .dropTableIfExists('data')
+        .dropTableIfExists('layers')
+        .dropTableIfExists('axes')
         .dropTableIfExists('graphs')
-        .dropTableIfExists('users')
+        .dropTableIfExists('users');
 };
