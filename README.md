@@ -55,7 +55,7 @@
   }
   ```
   
-## Auth Endpoints
+## User Endpoints
   
 ### GET /api/users/
 
@@ -78,6 +78,7 @@
 ### GET /api/users/:id
 
   - INPUT - none
+  
   - OUTPUT - the 'username', and 'email' of the user with ':id'
   ```
   {
@@ -88,6 +89,7 @@
 ### GET /api/users/:id/graphs
 
   - INPUT - none
+  
   - OUTPUT - a list of all user:id's graphs with their 'id' and 'name'
   ```
   [
@@ -105,5 +107,106 @@
     }
   ]
   ```
+## Graph Endpoints
+
+### GET /api/graphs/:id
+
+  - INPUT - none
   
-  EOF
+  - OUTPUT - an object with a matching ID containing a 'id','name','owner','theme','axis' array,'layer'array, and a 2D 'data' array
+  ```
+  {
+    "id":2,
+    "name":"test2",
+    "owner":1,
+    "theme":1,
+    "axis":["axis1","axis2","axis3","axis4"],
+    "layer":["layer1","layer2","layer3","layer4"],
+    "data":[
+      [11,12,13,14],
+      [21,22,23,24],
+      [31,32,33,34],
+      [41,42,43,44]
+    ]
+  }
+  ```
+### POST /api/graphs/
+
+  - INPUT - an object containing a 'name','owner','theme','axis' array,'layer'array, and a 2D 'data' array
+  ```
+  {
+    "name":"test2",
+    "owner":1,
+    "theme":1,
+    "axis":["axis1","axis2","axis3","axis4"],
+    "layer":["layer1","layer2","layer3","layer4"],
+    "data":[
+      [11,12,13,14],
+      [21,22,23,24],
+      [31,32,33,34],
+      [41,42,43,44]
+    ]
+  }
+  ```
+  - OUTPUT - the new object containing a 'id','name','owner','theme','axis' array,'layer'array, and a 2D 'data' array
+  ```
+  {
+    "id":2,
+    "name":"test2",
+    "owner":1,
+    "theme":1,
+    "axis":["axis1","axis2","axis3","axis4"],
+    "layer":["layer1","layer2","layer3","layer4"],
+    "data":[
+      [11,12,13,14],
+      [21,22,23,24],
+      [31,32,33,34],
+      [41,42,43,44]
+    ]
+  }
+  ```
+### PUT /api/graphs/:id
+
+  - INPUT - an object containing a 'name','owner','theme','axis' array, 'layer' array, and a 2D 'data' array
+  ```
+  {
+    "name": "put2",
+    "owner": 1,
+    "theme": 1,
+    "axis": ["axis5","axis6","axis7","axis8"],
+    "layer": ["layerA","layerB","layerC","layerD"],
+    "data": [
+      [511,512,513,514],
+      [611,612,613,614],
+      [711,712,713,714],
+      [811,812,813,814]
+    ]
+  }
+  ```
+  - OUTPUT - an updated object with a matching ID containing a 'id','name','owner','theme','axis' array,'layer'array, and a 2D 'data' array
+  ```
+  {
+    "id": 1,
+    "name": "put2",
+    "owner": 1,
+    "theme": 1,
+    "axis": ["axis5","axis6","axis7","axis8"],
+    "layer": ["layerA","layerB","layerC","layerD"],
+    "data": [
+      [511,512,513,514],
+      [611,612,613,614],
+      [711,712,713,714],
+      [811,812,813,814]
+    ]
+  }
+  ```
+### DELETE /api/graphs/:id
+
+  - INPUT - none
+  
+  - OUTPUT - a message showing the matching graph was removed
+  ```
+  {
+    "message": "Graph 1 removed."
+  }
+  ```
