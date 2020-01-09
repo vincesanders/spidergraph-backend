@@ -4,7 +4,9 @@ const getData = id => {
     return db.select(
         'd.value as Value',
         'a.name as Axis',
+        'a.index as AxisPos',
         'l.name as Layer',
+        'l.index as LayerPos',
         'g.id as GraphID',
         'g.name as Graph',
         'g.theme as Theme',
