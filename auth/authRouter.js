@@ -11,7 +11,7 @@ router.post('/login',(req,res)=>{
         .then(user => {
             if(user.password && bcrypt.compareSync(password,user.password)){
                 const token = generateToken(user);
-                res.status(201).json({username:user.username,email:user.email,token:token});
+                res.status(201).json({id:user.id,username:user.username,email:user.email,token:token});
             } else {
                 res.status(400).json({message:'Invalid username or password'})
             }
@@ -27,7 +27,7 @@ router.post('/register',(req,res)=>{
     auth.register(username,password,email)
         .then(user => {
             const token = generateToken(user);
-            res.status(201).json({username:user.username,email:user.email,token:token});
+            res.status(201).json({id:user.id,username:user.username,email:user.email,token:token});
         })
         .catch(err => {
             auth.unique(username,email)
