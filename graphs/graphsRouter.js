@@ -27,6 +27,7 @@ const dataFormatter = data => {
         name:data[0].Graph,
         owner:data[0].Owner,
         theme:data[0].Theme,
+        notes:data[0].Notes,
         axis:[],
         layer:[],
         data:[]
@@ -74,8 +75,8 @@ router.get('/:id',(req,res)=>{
         
 })
 router.post('/',(req,res)=>{
-    const {name,owner,theme,axis,layer,data} = req.body;
-    graphs.addG({name:name,owner:owner,theme:theme})
+    const {name,owner,theme,notes,axis,layer,data} = req.body;
+    graphs.addG({name:name,owner:owner,theme:theme,notes:notes})
         .then(graphId => {
             graphs.addA(axis,graphId[0])
         .then(axisId => {
@@ -94,7 +95,7 @@ router.post('/',(req,res)=>{
 
 })
 router.put('/:id',(req,res)=>{
-    const {name,owner,theme,axis,layer,data} = req.body;
+    const {name,owner,theme,notes,axis,layer,data} = req.body;
     graphs.getData(req.params.id)
         .then(gData => {
             const ids = axisIdCatcher(gData);
@@ -104,7 +105,7 @@ router.put('/:id',(req,res)=>{
         .then( () => {
             graphs.remA(req.params.id)
         .then( () => {
-            graphs.updG({name:name,owner:owner,theme:theme},req.params.id)
+            graphs.updG({name:name,owner:owner,theme:theme,notes},req.params.id)
         .then( () => {
             graphs.addA(axis,req.params.id)
         .then(axisId => {

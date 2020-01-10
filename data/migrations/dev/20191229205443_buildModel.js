@@ -20,8 +20,7 @@ exports.up = function(knex) {
                 .inTable('users')
             tbl.integer('theme')
                 .notNullable()
-            tbl.float('scale')
-                .notNullable()
+            tbl.string('notes',1000)
         })
         .createTable('axes', tbl => {
             tbl.increments()

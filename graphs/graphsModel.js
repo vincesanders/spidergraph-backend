@@ -11,7 +11,8 @@ const getData = id => {
         'g.id as GraphID',
         'g.name as Graph',
         'g.owner as Owner',
-        'g.theme as Theme'
+        'g.theme as Theme',
+        'g.notes as Notes'
     ).from('data as d')
         .join('layers as l','d.layerId','l.id')
         .join('axes as a','d.axisId','a.id')
@@ -21,8 +22,7 @@ const getData = id => {
 }
 
 const addG = graph => {
-    const {name,owner,theme} = graph;
-    return db('graphs').insert({name:name,owner:owner,theme:theme,scale:0})
+    return db('graphs').insert(graph)
 }
 const addA = (axis,graphId) => {
     const axes = axis.map((a,i)=>{
