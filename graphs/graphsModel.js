@@ -22,19 +22,19 @@ const getData = id => {
 }
 
 const addG = graph => {
-    return db('graphs').insert(graph)
+    return db('graphs').insert(graph, 'id')
 }
 const addA = (axis,graphId) => {
     const axes = axis.map((a,i)=>{
         return {name:a,graphId:graphId,index:i};
     });
-    return db('axes').insert(axes);
+    return db('axes').insert(axes, 'id');
 }
 const addL = (layer,graphId) => {
     const layers = layer.map((l,i)=>{
         return {name:l,graphId:graphId,index:i};
     });
-    return db('layers').insert(layers);
+    return db('layers').insert(layers, 'id');
 }
 const addD = (data,axisId,layerId) => {
     const dataSet = [];
@@ -45,7 +45,7 @@ const addD = (data,axisId,layerId) => {
             dataSet.push({value:val,axisId:aStart+ai,layerId:lStart+li})
         })
     });
-    return db('data').insert(dataSet);
+    return db('data').insert(dataSet, 'id');
 }
 const updG = (newGraph,graphId) => {
     return db('graphs').where('id',graphId)

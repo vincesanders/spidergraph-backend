@@ -7,7 +7,7 @@ const login = username => {
         .first()
 }
 const register = async (username,password,email) => {
-    await db('users').insert({username:username,password:password,email:email})
+    await db('users').insert({username:username,password:password,email:email}, 'id')
     return db('users')
         .select('id','username','email')
         .where({username:username})

@@ -18,7 +18,7 @@ router.get('/:id',(req,res) => {
         .then(user => {
             user
                 ? res.status(200).json(user)
-                : res.status(400).json({message:"There no user with that ID"});
+                : res.status(400).json({message:"There is no user with that ID"});
         })
         .catch(err => {
             res.status(500).json({...err,message:"Error getting the user list"});
